@@ -7,12 +7,12 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
 /**
-	Service/Business logic 
+	Service/Business logic ~ Separation of concerns
 */
 
 @Service
 public class SystemMonitorService{
-	
+
 	//Reads CPU Temp pf the PI
 	public double getCpuTemperature() throws Exception {
 		String temp = Files.readString(Paths.get("/sys/class/thermal/thermal_zone0/temp"));

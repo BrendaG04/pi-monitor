@@ -17,8 +17,8 @@ public class SystemStats{
 
 	//Constructors
 	public SystemStats(){
-	
-	}	
+
+	}
 
 	//Getters & Setters in order to convert to JSON
 	public double getCpuTemperature(){
@@ -50,7 +50,7 @@ public class SystemStats{
 	}
 
 	public double getMemoryUsagePercent(){
-		return memoryUsagePercent;	
+		return memoryUsagePercent;
 	}
 	public void setMemoryUsagePercent(double memoryUsagePercent){
 		this.memoryUsagePercent = memoryUsagePercent;
@@ -62,9 +62,4 @@ public class SystemStats{
 	public void setUptime(String uptime){
 		this.uptime = uptime;
 	}
-	
-
-
-
-
 }

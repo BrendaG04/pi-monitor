@@ -31,7 +31,7 @@ public class SystemController {
 	@GetMapping("/temperature")
 	public String getTemperature() {
 		try {
-			return "CPU Temperature: " + monitorService.getCpuTemperature() + " C";	
+			return "CPU Temperature: " + monitorService.getCpuTemperature() + "°C";	
 		} catch (Exception e){
 			return "Error reading temperature: " + e.getMessage();
 		}
