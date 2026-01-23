@@ -60,12 +60,19 @@ public class SystemControllerTest {
 
 		assertTrue(stats.getCpuTemperature() > 20.0, "CPU temp should be reasonable");
 		assertTrue(stats.getTotalMemoryMB() > 512, "Total memory should be reasonable");
-		assertTrue(stats.getMemoryUsagePercent() > 0, "Memory usage should be positive"); 
+		assertTrue(stats.getMemoryUsagePercent() > 0, "Memory usage should be positive");
+
+		assertTrue(stats.getTotalDiskGB() > 4, "Total Disk space should be reasonable");
+		assertTrue(stats.getDiskUsagePercent() > 0, "Disk usage should b positive");
+
 		assertNotNull(stats.getUptime(), "Uptime should not be null");
+
 
 		System.out.println("✔ SystemStats enpoint test passed!");
 		System.out.println(" Temperature: " + stats.getCpuTemperature() + "°C");
 		System.out.println(" Memory: "+ stats.getUsedMemoryMB() + "/" + stats.getTotalMemoryMB() + " MB (" + String.format("%.1f", stats.getMemoryUsagePercent()) + "%)");
+		System.out.println(" Disk Space: "+ stats.getUsedDiskGB() + "/" + stats.getTotalDiskGB() + " GB (" + String.format("%.1f", stats.getDiskUsagePercent()) + "%)");
+
 		System.out.println(" Uptime: " + stats.getUptime());
 	}
 }

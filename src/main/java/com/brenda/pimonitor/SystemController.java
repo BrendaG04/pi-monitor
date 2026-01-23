@@ -7,16 +7,16 @@ import org.springframework.web.bind.annotation.RestController;
 /**
 	Controller Class - Web Server Requests ~ API endpoints
 */
-@RestController 
+@RestController
 public class SystemController {
-	
+
 	//Dependency Injection (service is automaticalally provided)
 	@Autowired
 	private SystemMonitorService monitorService;
 
 	@GetMapping("/")
 	public String home() {
-		return "Welcome to Brenda's Pi Monitor API! Try endpoint /stats"; 
+		return "Welcome to Brenda's Pi Monitor API! Try endpoint /stats";
 	}
 
 	@GetMapping("/stats")
@@ -31,7 +31,7 @@ public class SystemController {
 	@GetMapping("/temperature")
 	public String getTemperature() {
 		try {
-			return "CPU Temperature: " + monitorService.getCpuTemperature() + "°C";	
+			return "CPU Temperature: " + monitorService.getCpuTemperature() + "°C";
 		} catch (Exception e){
 			return "Error reading temperature: " + e.getMessage();
 		}

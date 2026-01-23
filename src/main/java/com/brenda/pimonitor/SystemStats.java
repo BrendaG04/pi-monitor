@@ -1,19 +1,36 @@
 package com.brenda.pimonitor;
-
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
 	Data Model ~ APIs will return structured data (JSON)
 */
 
 
+@JsonPropertyOrder({
+	"cpuTemperature",
+	"totalMemoryMB",
+	"freeMemoryMB",
+	"usedMemoryMB",
+	"memoryUsagePercent",
+	"totalDiskGB",
+	"freeDiskGB",
+	"usedDiskGB",
+	"diskUsagePercent",
+	"uptime"
+})
 public class SystemStats{
 	private double cpuTemperature;
 	private long totalMemoryMB;
 	private long freeMemoryMB;
 	private long usedMemoryMB;
 	private double memoryUsagePercent;
-	private String uptime;
 
+	private long totalDiskGB;
+	private long freeDiskGB;
+	private long usedDiskGB;
+	private double diskUsagePercent;
+
+	private String uptime;
 
 	//Constructors
 	public SystemStats(){
@@ -54,6 +71,34 @@ public class SystemStats{
 	}
 	public void setMemoryUsagePercent(double memoryUsagePercent){
 		this.memoryUsagePercent = memoryUsagePercent;
+	}
+
+	public long getTotalDiskGB(){
+		return totalDiskGB;
+	}
+	public void setTotalDiskGB(long totalDiskGB){
+		this.totalDiskGB = totalDiskGB;
+	}
+
+	public long getFreeDiskGB(){
+		return freeDiskGB;
+	}
+	public void setFreeDiskGB(long freeDiskGB){
+		this.freeDiskGB = freeDiskGB;
+	}
+
+	public long getUsedDiskGB(){
+		return usedDiskGB;
+	}
+	public void setUsedDiskGB(long usedDiskGB){
+		this.usedDiskGB = usedDiskGB;
+	}
+
+	public double getDiskUsagePercent(){
+		return diskUsagePercent;
+	}
+	public void setDiskUsagePercent(double diskUsagePercent){
+		this.diskUsagePercent = diskUsagePercent;
 	}
 
 	public String getUptime(){

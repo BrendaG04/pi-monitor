@@ -70,7 +70,26 @@ public class SystemMonitorServiceTest{
 		assertTrue(stats.getMemoryUsagePercent() >= 0 && stats.getMemoryUsagePercent() <=100, "Memory should be between 0-100");
 		assertNotNull(stats.getUptime(), "Uptime should not be null");
 
+		assertTrue(stats.getTotalDiskGB() > 4, "Total disk should be reasonable");
+		assertTrue(stats.getFreeDiskGB() > 0, "Free disk should be positive");
+		assertTrue(stats.getDiskUsagePercent() >= 0 && stats.getDiskUsagePercent() <= 100 , "Disk usage should be between 0-100%");
+
 		System.out.println("✔ Full SystemStats test passed!");
+	}
+
+	@Test
+	public void testGetDiskSpace() throws Exception {
+		long[] diskInfo = service.getDiskSpace();
+
+		//diskInfo has 3 elements, diskInfo[0] = total GB, diskInfo[1] = available GB, diskInfo[2] = used GB
+		assertEquals(3, diskInfo.length, "Should return array of 3 elements");
+
+		assertTrue(diskInfo[0] > 4, "Total disk space should be at least 4 GB");
+		assertTrue(diskInfo[1] > 0, "Available disk space should be positive");
+		assertTrue(diskInfo[2] > 0, "Used disk space should be positive");
+		assertTrue(diskInfo[2] < diskInfo[0], "Used disk space should be less than total disk space");
+
+		System.out.println("✔ Disk space test passed - Total: " + diskInfo[0] + " GB, Available: " + diskInfo[1] + " GB, Used: " + diskInfo[2] + " GB");
 	}
 }
 
