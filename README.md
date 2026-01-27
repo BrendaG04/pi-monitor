@@ -7,9 +7,12 @@ A full stack real time system monitoring dashboard for Raspberry Pi, featuring a
 ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.2-green)
 ![React](https://img.shields.io/badge/React-19-blue)
 
+<img width="1900" height="1200" alt="Dashboard Screenshot" src="https://github.com/user-attachments/assets/6e0ef7ad-2c95-4bc5-b091-3e1bb0268d99" />
+
+
 ## Overview
 
-This project monitors Raspberry Pi hardware metrics in real time, including:
+This project monitors Raspberry Pi hardware metrics in near real-time (2second polling), including:
 - CPU Temperature
 - Memory Usage (Total, Used, Free, %)
 - Disk Space (Total, Used, Free, %)
@@ -46,7 +49,7 @@ This project monitors Raspberry Pi hardware metrics in real time, including:
 - **Java 21** - Core language
 - **Spring Boot 3.2** - REST API framework
 - **Maven** - Build tool
-- **JUnit 5** - Testing framework (8 tests, 100% coverage)
+- **JUnit 5** - Testing framework (8 tests, Full coverage of core services and controllers)
 
 ### Frontend
 - **React 19** - UI framework
@@ -60,7 +63,6 @@ This project monitors Raspberry Pi hardware metrics in real time, including:
 
 
 ## Features
-
 - ✅ Real-time monitoring (2-second refresh rate)
 - ✅ RESTful API with JSON responses
 - ✅ Responsive design (mobile-friendly)
@@ -75,13 +77,6 @@ This project monitors Raspberry Pi hardware metrics in real time, including:
 
 ## 📦 Installation
 
-### Prerequisites
-- Raspberry Pi (any model with Raspberry Pi OS)
-- Java 17
-- Node.js 20+
-- Maven
-- nginx
-
 ### Setup
 
 1. **Clone the repository:**
@@ -90,25 +85,13 @@ git clone
 cd pi-monitor
 ```
 
-2. **Build backend:**
-```bash
-mvn clean package
-```
-
-3. **Build frontend:**
-```bash
-cd ../pi-monitor-frontend
-npm install
-npm run build
-```
-
-4. **Deploy:**
+2. **Builds & Deployment:**
 ```bash
 chmod +x ~/deploy-pi-monitor.sh
 ~/deploy-pi-monitor.sh
 ```
 
-5. **Access the dashboard:**
+3. **Access the dashboard:**
 ```
 http://your-pi-ip
 ```
@@ -116,7 +99,6 @@ http://your-pi-ip
 
 
 ## 🧪 Testing
-
 Run backend tests:
 ```bash
 cd ~/pi-monitor
@@ -153,26 +135,13 @@ Returns current system statistics.
 ```
 pi-monitor/
 ├── src/
-│   ├── main/java/com/brenda/pimonitor/
-│   │   ├── PiMonitorApplication.java      # Main entry point
-│   │   ├── SystemController.java          # REST controller
-│   │   ├── SystemMonitorService.java      # Business logic
-│   │   ├── SystemStats.java               # Data model
-│   │   └── CorsConfig.java                # CORS configuration
-│   └── test/java/com/brenda/pimonitor/
-│       ├── SystemMonitorServiceTest.java  # Unit tests
-│       └── SystemControllerTest.java      # Integration tests
-├── pom.xml                                # Maven configuration
+│   ├── main/java/...              # Springboot backend
+│   └── test/java/...              # Unit & Integration tests
+├── pom.xml                                
 └── README.md
 
 pi-monitor-frontend/
-├── src/
-│   ├── components/
-│   │   ├── StatCard.jsx                   # Reusable stat card
-│   │   ├── ConnectionStatus.jsx           # Connection indicator
-│   │   └── TemperatureChart.jsx           # Chart component
-│   ├── App.js                             # Main React component
-│   └── App.css                            # Styles
+├── src/                           # React Components
 └── package.json
 ```
 
@@ -191,28 +160,11 @@ This script:
 5. Deploys new versions
 6. Restarts services
 
-### Service Management
-```bash
-# Check status
-sudo systemctl status pi-monitor-backend
-
-# View logs
-tail -f /opt/pi-monitor/logs/backend.log
-
-# Restart
-sudo systemctl restart pi-monitor-backend
-sudo systemctl restart nginx
-```
 
 ## Future Enhancements
 
 - [ ] Authentication (JWT)
 - [ ] HTTPS/SSL
-- [ ] Historical data storage
-- [ ] Email alerts for critical metrics
-- [ ] Network traffic monitoring
-- [ ] Process list viewer
-- [ ] Dark/light theme toggle
 
 ## What I Learned
 
