@@ -8,12 +8,14 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
 import static org.junit.jupiter.api.Assertions.*;
+import org.springframework.context.annotation.Import;
 
 /**
 	Integration Testing ~ Controller / Http Endpooint
 */
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@Import(TestSecurityConfig.class)
 public class SystemControllerTest {
 
 	@LocalServerPort
@@ -42,7 +44,7 @@ public class SystemControllerTest {
 
 		assertEquals(HttpStatus.OK, response.getStatusCode(), "Should return 200 OK");
 
-		assertTrue(response.getBody().contains("CPU Temperature"), "Should contain 'CPU Temperatureee'");
+		assertTrue(response.getBody().contains("CPU Temperature"), "Should contain 'CPU Temperature'");
 		assertTrue(response.getBody().contains("°C"), "Should contain degree symbol");
 
 		System.out.println("✔ Temperature endpoint test passed!");
