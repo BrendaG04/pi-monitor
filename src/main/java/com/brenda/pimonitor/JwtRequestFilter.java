@@ -51,7 +51,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
 		//In case of a username but no auth
 		if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-			User user = authService.getUser(username);
+			UserEntity user = authService.getUser(username);
 			if ( user != null && jwtUtil.validateToken(jwt, username)) {
 				UserBuilder userBuilder = org.springframework.security.core.userdetails.User.withUsername(username);
 				UserDetails userDetails = userBuilder

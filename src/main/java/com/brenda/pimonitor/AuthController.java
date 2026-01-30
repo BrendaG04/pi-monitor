@@ -44,7 +44,7 @@ public class AuthController {
 		}
 
 		//Authenticating user
-		User user = authService.authenticate(
+		UserEntity user = authService.authenticate(
 			loginRequest.getUsername(),
 			loginRequest.getPassword()
 		);
@@ -63,6 +63,29 @@ public class AuthController {
 				.body("Invalid username or password");
 		}
 	}
+
+	@PostMapping("/signup")
+    	public ResponseEntity<?> signup(@Valid @RequestBody SignupRequest signupRequest) {
+
+	        // Register user (creates pending user)
+        	PasswordValidator.ValidationResult result = authService.registerUser(
+        	    signupRequest.getUsername(),
+            	    signupRequest.getPassword(),
+            	    signupRequest.getEmail()
+        	);
+        
+        	if (result.isValid()) {
+        	    return ResponseEntity.ok(new SignupResponse(
+			"Registration succesful! You can now login.",
+                	signupRequest.getUsername()
+            	    ));
+        	} else {
+            		return ResponseEntity.badRequest().body(new SignupResponse(
+                		result.getErrorMessage(),
+                		null
+            		));
+        	}
+    	}
 
 	//helper method to get clients ip
 	private String getClientIP(HttpServletRequest request) {
