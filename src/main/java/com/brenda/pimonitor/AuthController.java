@@ -1,5 +1,9 @@
 package com.brenda.pimonitor;
 
+import jakarta.validation.Valid;
+import io.github.bucket4j.Bucket;
+import io.github.bucket4j.ConsumptionProbe;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,8 +23,25 @@ public class AuthController {
 	@Autowired
 	private JwtUtil jwtUtil;
 
+	@Autowired
+	private RateLimitService rateLimitService;
+
 	@PostMapping("/login")
-	private ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
+	private ResponseEntity<?> login(@Valid @RequestBody LoginRequest loginRequest, HttpServletRequest request) {
+
+		//getting clients Ip address
+		String clientIP = getClientIP(request);
+
+		//checks rate limit
+		Bucket bucket = rateLimitService.resolveBucket(clientIP);
+		ConsumptionProbe probe = bucket.tryConsumeAndReturnRemaining(1);
+
+		if (!probe.isConsumed()) {
+			//rate limit exceeded
+			long waitForRefill = probe.getNanosToWaitForRefill() / 1_000_000_000;
+			return ResponseEntity.status(HttpStatus.TOO_MANY_REQUESTS)
+					.body("Too many login attempts.Please try again in " +  waitForRefill + " seconds.");
+		}
 
 		//Authenticating user
 		User user = authService.authenticate(
@@ -43,6 +64,16 @@ public class AuthController {
 		}
 	}
 
+	//helper method to get clients ip
+	private String getClientIP(HttpServletRequest request) {
+		String xfHeader = request.getHeader("X-Forwarded-For");
+		if (xfHeader == null) {
+			return request.getRemoteAddr();
+		}
+		return xfHeader.split(",")[0];
+	}
+
+
 	@GetMapping("/verify")
 	public ResponseEntity<?> verifyToken(@RequestHeader("Authorization") String authHeader) {
 		try {
@@ -55,7 +86,7 @@ public class AuthController {
 				return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid token");
 			}
 		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalide token ");
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid token");
 		}
 	}
 }
