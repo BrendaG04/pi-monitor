@@ -8,8 +8,8 @@ A full stack real time system monitoring dashboard for Raspberry Pi, featuring a
 ![React](https://img.shields.io/badge/React-19-blue)
 
 <img width="1464" height="864" alt="image" src="https://github.com/user-attachments/assets/e04e7f8e-5e29-42ab-abc7-cb90ee15b9ba" />
-<img width="400" height="600" alt="image" src="https://github.com/user-attachments/assets/71f3265b-1e4d-4a84-8fe4-0d5c3aa0a57a" />
-<img width="400" height="600" alt="image" src="https://github.com/user-attachments/assets/8c398609-44b7-4f38-8f34-aee3592c8808" />
+<img width="350" height="600" alt="image" src="https://github.com/user-attachments/assets/71f3265b-1e4d-4a84-8fe4-0d5c3aa0a57a" />
+<img width="350" height="600" alt="image" src="https://github.com/user-attachments/assets/8c398609-44b7-4f38-8f34-aee3592c8808" />
 
 ## Overview
 
