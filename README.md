@@ -7,8 +7,9 @@ A full stack real time system monitoring dashboard for Raspberry Pi, featuring a
 ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.2-green)
 ![React](https://img.shields.io/badge/React-19-blue)
 
-<img width="1900" height="1200" alt="Dashboard Screenshot" src="https://github.com/user-attachments/assets/6e0ef7ad-2c95-4bc5-b091-3e1bb0268d99" />
-
+<img width="1464" height="864" alt="image" src="https://github.com/user-attachments/assets/e04e7f8e-5e29-42ab-abc7-cb90ee15b9ba" />
+<img width="400" height="600" alt="image" src="https://github.com/user-attachments/assets/71f3265b-1e4d-4a84-8fe4-0d5c3aa0a57a" />
+<img width="400" height="600" alt="image" src="https://github.com/user-attachments/assets/8c398609-44b7-4f38-8f34-aee3592c8808" />
 
 ## Overview
 
