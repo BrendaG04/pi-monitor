@@ -1,6 +1,6 @@
 # Raspberry Pi System Monitor 
 
-A full stack real time system monitoring dashboard for Raspberry Pi, featuring a Java Spring Boot backend and React frontend.
+A full stack real time system monitoring dashboard for Raspberry Pi, featuring a Java Spring Boot [backend](https://github.com/BrendaG04/pi-monitor) and React [frontend](https://github.com/BrendaG04/pi-monitor-frontend).
 
 ![Project Status](https://img.shields.io/badge/status-deployed-success)
 ![Java](https://img.shields.io/badge/Java-21-orange)
