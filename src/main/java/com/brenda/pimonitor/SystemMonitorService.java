@@ -13,8 +13,23 @@ import java.io.InputStreamReader;
 @Service
 public class SystemMonitorService{
 
+	private final boolean isCloudEnvironment;
+
+	public SystemMonitorService() {
+		//Mock data no termina data if it is cloud running
+		this.isCloudEnvironment = !new java.io.File("/proc/meminfo").exists();
+		if (isCloudEnvironment) {
+			System.out.println("Running in cloud environment - using mock data");
+		}
+	}
+
 	//Reads CPU Temp pf the PI
 	public double getCpuTemperature() throws Exception {
+
+		if (isCloudEnvironment) {
+			return 45.0 + (Math.random() * 10);
+		}
+
 		String temp = Files.readString(Paths.get("/sys/class/thermal/thermal_zone0/temp"));
 		double celsius = Double.parseDouble(temp.trim())/1000.0;
 		return Math.round(celsius * 10.0) / 10.0;
@@ -22,6 +37,14 @@ public class SystemMonitorService{
 
 	//Reads Memory info from Pi
 	public long[] getMemoryInfo() throws Exception {
+
+		if (isCloudEnvironment) {
+			long totalMB = 512;
+			long availableMB = 256 + (long)(Math.random() + 100);
+			long usedMB = totalMB - availableMB;
+			return new long[]{totalMB, availableMB, usedMB};
+		}
+	
 		String memInfo = Files.readString(Paths.get("/proc/meminfo"));
 		long totalKB = 0;
 		long freeKB = 0;
@@ -68,6 +91,16 @@ public class SystemMonitorService{
 
 	//Reads Disk info from Pi
 	public long[] getDiskSpace() throws Exception {
+
+		if (isCloudEnvironment) {
+            		// Mock disk data for cloud
+            		long totalGB = 10;
+            		long availableGB = 5 + (long)(Math.random() * 3);
+            		long usedGB = totalGB - availableGB;
+            		return new long[]{totalGB, availableGB, usedGB};
+        	}
+
+
 		//Disk Info comes from the df command, so ProcessBuilder is needed to run a shell command
 		ProcessBuilder pb = new ProcessBuilder("df" , "-B1", "/");
 		Process process = pb.start();
@@ -103,6 +136,16 @@ public class SystemMonitorService{
 
 	//Reads system uptime
 	public String getUptime() throws Exception {
+
+        	if (isCloudEnvironment) {
+            		// Mock uptime for cloud
+            		long hours = (long)(Math.random() * 100);
+            		long minutes = (long)(Math.random() * 60);
+	            	return String.format("%d hours, %d minutes", hours, minutes);
+        	}
+
+
+
 		String uptimeData = Files.readString(Paths.get("/proc/uptime"));
 		double uptimeSeconds = Double.parseDouble(uptimeData.split(" ")[0]);
 
