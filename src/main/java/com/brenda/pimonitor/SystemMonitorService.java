@@ -16,12 +16,19 @@ public class SystemMonitorService{
 	private final boolean isCloudEnvironment;
 
 	public SystemMonitorService() {
-		//Mock data no termina data if it is cloud running
-		this.isCloudEnvironment = !new java.io.File("/proc/meminfo").exists();
-		if (isCloudEnvironment) {
-			System.out.println("Running in cloud environment - using mock data");
-		}
+    		// Check for Railway specific environment variable or a custom one
+    		String railwayEnv = System.getenv("RAILWAY_ENVIRONMENT");
+
+    		// If RAILWAY_ENVIRONMENT exists, or /sys/class/thermal is missing, it's cloud
+    		this.isCloudEnvironment = (railwayEnv != null) || !new java.io.File("/sys/class/thermal/thermal_zone0/temp").exists();
+
+    		if (isCloudEnvironment) {
+       	 		System.out.println("Running in cloud environment - using mock data");
+    		} else {
+        		System.out.println("Running on Physical Hardware - reading system files");
+    		}
 	}
+
 
 	//Reads CPU Temp pf the PI
 	public double getCpuTemperature() throws Exception {
