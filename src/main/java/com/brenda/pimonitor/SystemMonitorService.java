@@ -14,6 +14,7 @@ import java.io.InputStreamReader;
 public class SystemMonitorService{
 
 	private final boolean isCloudEnvironment;
+   	private long cloudStartTime; // Tracks when service started for realistic uptime
 
 	public SystemMonitorService() {
     		// Check for Railway specific environment variable or a custom one
@@ -23,6 +24,7 @@ public class SystemMonitorService{
     		this.isCloudEnvironment = (railwayEnv != null) || !new java.io.File("/sys/class/thermal/thermal_zone0/temp").exists();
 
     		if (isCloudEnvironment) {
+		        this.cloudStartTime = System.currentTimeMillis();
        	 		System.out.println("Running in cloud environment - using mock data");
     		} else {
         		System.out.println("Running on Physical Hardware - reading system files");
@@ -34,7 +36,10 @@ public class SystemMonitorService{
 	public double getCpuTemperature() throws Exception {
 
 		if (isCloudEnvironment) {
-			return 45.0 + (Math.random() * 10);
+           		double baseTemp = 45.0;
+            		double variation = (Math.random() * 5.0) - 2.5; // ±2.5°C variation
+            		double temp = baseTemp + variation;
+            		return Math.round(temp * 10.0) / 10.0; // Round to 1 decimal
 		}
 
 		String temp = Files.readString(Paths.get("/sys/class/thermal/thermal_zone0/temp"));
@@ -46,10 +51,11 @@ public class SystemMonitorService{
 	public long[] getMemoryInfo() throws Exception {
 
 		if (isCloudEnvironment) {
-			long totalMB = 512;
-			long availableMB = 256 + (long)(Math.random() + 100);
-			long usedMB = totalMB - availableMB;
-			return new long[]{totalMB, availableMB, usedMB};
+            		long totalMB = 3796;
+            		double usagePercent = 0.60 + (Math.random() * 0.20); // 60-80% usage
+            		long usedMB = (long)(totalMB * usagePercent);
+            		long availableMB = totalMB - usedMB;
+            		return new long[]{totalMB, availableMB, usedMB};
 		}
 	
 		String memInfo = Files.readString(Paths.get("/proc/meminfo"));
@@ -101,9 +107,10 @@ public class SystemMonitorService{
 
 		if (isCloudEnvironment) {
             		// Mock disk data for cloud
-            		long totalGB = 10;
-            		long availableGB = 5 + (long)(Math.random() * 3);
-            		long usedGB = totalGB - availableGB;
+            		long totalGB = 28;
+            		double usagePercent = 0.40 + (Math.random() * 0.20); // 40-60% usage
+            		long usedGB = (long)(totalGB * usagePercent);
+            		long availableGB = totalGB - usedGB;
             		return new long[]{totalGB, availableGB, usedGB};
         	}
 
@@ -146,12 +153,22 @@ public class SystemMonitorService{
 
         	if (isCloudEnvironment) {
             		// Mock uptime for cloud
-            		long hours = (long)(Math.random() * 100);
-            		long minutes = (long)(Math.random() * 60);
-	            	return String.format("%d hours, %d minutes", hours, minutes);
+	            	long currentTime = System.currentTimeMillis();
+        	    	long uptimeMillis = currentTime - cloudStartTime;
+            	    	long uptimeSeconds = uptimeMillis / 1000;
+            
+            		long days = uptimeSeconds / 86400;
+            	    	long hours = (uptimeSeconds % 86400) / 3600;
+            	    	long minutes = (uptimeSeconds % 3600) / 60;
+           	 // Format based on duration
+            		if (days > 0) {
+                		return String.format("%d days, %d hours", days, hours);
+            		} else if (hours > 0) {
+                		return String.format("%d hours, %d minutes", hours, minutes);
+            		} else {
+                		return String.format("%d minutes", minutes);
+            		}
         	}
-
-
 
 		String uptimeData = Files.readString(Paths.get("/proc/uptime"));
 		double uptimeSeconds = Double.parseDouble(uptimeData.split(" ")[0]);
