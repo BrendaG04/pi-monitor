@@ -1,15 +1,16 @@
 package com.brenda.pimonitor.service;
 
-import com.brenda.pimonitor.model.UserEntity;
-import com.brenda.pimonitor.repository.UserRepository;
-import com.brenda.pimonitor.validation.PasswordValidator;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Service;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
+
+import com.brenda.pimonitor.model.UserEntity;
+import com.brenda.pimonitor.repository.UserRepository;
+import com.brenda.pimonitor.validation.PasswordValidator;
 
 /**
 	Spring Security ~ Auth service class / handles login logic

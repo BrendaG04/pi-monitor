@@ -1,11 +1,13 @@
 package com.brenda.pimonitor.service;
 
-import com.brenda.pimonitor.model.SystemStats;
-import org.springframework.stereotype.Service;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+import org.springframework.stereotype.Service;
+
+import com.brenda.pimonitor.model.SystemStats;
 
 /**
 	Service/Business logic ~ Separation of concerns
