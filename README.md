@@ -6,10 +6,10 @@
 A full stack real time system monitoring dashboard for Raspberry Pi, featuring a Java Spring Boot [backend](https://github.com/BrendaG04/pi-monitor) and React [frontend](https://github.com/BrendaG04/pi-monitor-frontend).
 
 ![Project Status](https://img.shields.io/badge/status-deployed-success)
-![Java](https://img.shields.io/badge/Java-21-orange)
+![Java](https://img.shields.io/badge/Java-17-orange)
 ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.2-green)
 ![React](https://img.shields.io/badge/React-19-blue)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-blue)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-blue)
 
 
 <img width="1464" height="864" alt="image" src="https://github.com/user-attachments/assets/e04e7f8e-5e29-42ab-abc7-cb90ee15b9ba" />
@@ -50,7 +50,7 @@ This project monitors Raspberry Pi hardware metrics in near real-time (2second p
 │PostgreSQL│ │ Linux System │  ← Reads /proc, /sys
 └─────────┘ └──────────────┘
 ```
-### Cloud Deployment (Railway)
+### Cloud Deployment (Vercel + Azure + Neon)
 ```
 ┌─────────────────┐
 │   Web Browser   │
@@ -58,24 +58,25 @@ This project monitors Raspberry Pi hardware metrics in near real-time (2second p
          │ HTTPS (pimonitor.app)
          ↓
 ┌─────────────────────────────┐
-│  Railway (Frontend Service) │  ← React App
+│  Vercel (Frontend)          │  ← React App
 └────────┬────────────────────┘
          │ API Calls
          ↓
 ┌─────────────────────────────┐
-│  Railway (Backend Service)  │  ← Spring Boot
+│  Azure App Service          │  ← Spring Boot
+│  (Backend)                  │
 └────────┬────────────────────┘
          │
          ↓
 ┌─────────────────────────────┐
-│  Railway (PostgreSQL DB)    │  ← User Data
+│  Neon (PostgreSQL DB)       │  ← User Data
 └─────────────────────────────┘
 ```
 
 ## Tech Stack
 
 ### Backend
-- **Java 21** - Core language
+- **Java 17** - Core language
 - **Spring Boot 3.2** - REST API framework
 - **Maven** - Build tool
 - **JUnit 5** - Testing framework (8 tests, Full coverage of core services and controllers)
@@ -86,9 +87,12 @@ This project monitors Raspberry Pi hardware metrics in near real-time (2second p
 - **CSS3** - Styling (glassmorphism design)
 
 ### Deployment
-- **systemd** - Service management
-- **nginx** - Web server & reverse proxy
-- **Bash** - Deployment automation
+- **Vercel** - Frontend hosting
+- **Azure App Service** - Backend hosting
+- **Neon** - Managed PostgreSQL
+- **systemd** - Service management (Pi)
+- **nginx** - Web server & reverse proxy (Pi)
+- **Bash** - Deployment automation (Pi)
 
 
 ## Features
@@ -188,13 +192,27 @@ Returns current system statistics.
 ```
 pi-monitor/
 ├── src/
-│   ├── main/java/...              # Springboot backend
-│   └── test/java/...              # Unit & Integration tests
+│   ├── main/java/com/brenda/pimonitor/
+│   │   ├── controller/        # REST API endpoints
+│   │   ├── service/           # Business logic
+│   │   ├── security/          # JWT, CORS, filters
+│   │   ├── model/             # Entity classes
+│   │   ├── repository/        # Data access
+│   │   ├── dto/               # Request/Response objects
+│   │   ├── validation/        # Input validation
+│   │   └── PiMonitorApplication.java
+│   ├── main/resources/
+│   │   └── application.properties
+│   └── test/java/...          # Unit & Integration tests
 ├── pom.xml                                
 └── README.md
 
 pi-monitor-frontend/
-├── src/                           # React Components
+├── src/
+│   ├── components/            # React UI components
+│   ├── contexts/              # Auth context
+│   └── App.js                 # Main app
+├── vercel.json                # Vercel config
 └── package.json
 ```
 
