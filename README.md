@@ -12,9 +12,9 @@ A full stack real time system monitoring dashboard for Raspberry Pi, featuring a
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-blue)
 
 
-<img width="1464" height="864" alt="image" src="https://github.com/user-attachments/assets/e04e7f8e-5e29-42ab-abc7-cb90ee15b9ba" />
-<img width="350" height="600" alt="image" src="https://github.com/user-attachments/assets/71f3265b-1e4d-4a84-8fe4-0d5c3aa0a57a" />
-<img width="350" height="600" alt="image" src="https://github.com/user-attachments/assets/8c398609-44b7-4f38-8f34-aee3592c8808" />
+<img width="1464" height="864" alt="image" src="https://github.com/user-attachments/assets/9f10016b-7628-4f02-b2d0-62307a459103" />
+<img width="450" height="600" alt="image" src="https://github.com/user-attachments/assets/619f0c8d-868c-445a-9d1e-59091a1b531b" />
+<img width="450" height="600" alt="image" src="https://github.com/user-attachments/assets/da3f62b4-df6d-4721-a78d-b6e087a4e770" />
 
 ## Overview
 
