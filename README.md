@@ -13,8 +13,8 @@ A full stack real time system monitoring dashboard for Raspberry Pi, featuring a
 
 
 <img width="1464" height="864" alt="image" src="https://github.com/user-attachments/assets/9f10016b-7628-4f02-b2d0-62307a459103" />
-<img width="450" height="600" alt="image" src="https://github.com/user-attachments/assets/619f0c8d-868c-445a-9d1e-59091a1b531b" />
-<img width="450" height="600" alt="image" src="https://github.com/user-attachments/assets/da3f62b4-df6d-4721-a78d-b6e087a4e770" />
+<img width="350" height="600" alt="image" src="https://github.com/user-attachments/assets/619f0c8d-868c-445a-9d1e-59091a1b531b" />
+<img width="350" height="600" alt="image" src="https://github.com/user-attachments/assets/da3f62b4-df6d-4721-a78d-b6e087a4e770" />
 
 ## Overview
 
