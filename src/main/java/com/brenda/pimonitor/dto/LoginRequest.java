@@ -1,4 +1,4 @@
-package com.brenda.pimonitor;
+package com.brenda.pimonitor.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;

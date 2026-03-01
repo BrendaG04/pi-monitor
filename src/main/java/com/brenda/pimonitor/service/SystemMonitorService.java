@@ -1,5 +1,6 @@
-package com.brenda.pimonitor;
+package com.brenda.pimonitor.service;
 
+import com.brenda.pimonitor.model.SystemStats;
 import org.springframework.stereotype.Service;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -17,11 +18,12 @@ public class SystemMonitorService{
    	private long cloudStartTime; // Tracks when service started for realistic uptime
 
 	public SystemMonitorService() {
-    		// Check for Railway specific environment variable or a custom one
+    		// Check for cloud environment variables
     		String railwayEnv = System.getenv("RAILWAY_ENVIRONMENT");
+    		String azureEnv = System.getenv("WEBSITE_SITE_NAME");
 
-    		// If RAILWAY_ENVIRONMENT exists, or /sys/class/thermal is missing, it's cloud
-    		this.isCloudEnvironment = (railwayEnv != null) || !new java.io.File("/sys/class/thermal/thermal_zone0/temp").exists();
+    		// If cloud env vars exist, or /sys/class/thermal is missing, it's cloud
+    		this.isCloudEnvironment = (railwayEnv != null) || (azureEnv != null) || !new java.io.File("/sys/class/thermal/thermal_zone0/temp").exists();
 
     		if (isCloudEnvironment) {
 		        this.cloudStartTime = System.currentTimeMillis();

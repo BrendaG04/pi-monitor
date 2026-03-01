@@ -1,5 +1,7 @@
 package com.brenda.pimonitor;
 
+import com.brenda.pimonitor.model.SystemStats;
+import com.brenda.pimonitor.service.SystemMonitorService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import static org.junit.jupiter.api.Assertions.*;

@@ -1,4 +1,4 @@
-package com.brenda.pimonitor;
+package com.brenda.pimonitor.model;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**

@@ -1,5 +1,6 @@
 package com.brenda.pimonitor;
 
+import com.brenda.pimonitor.model.SystemStats;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

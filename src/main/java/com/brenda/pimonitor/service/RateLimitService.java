@@ -1,4 +1,4 @@
-package com.brenda.pimonitor;
+package com.brenda.pimonitor.service;
 
 import io.github.bucket4j.Bandwidth;
 import io.github.bucket4j.Bucket;

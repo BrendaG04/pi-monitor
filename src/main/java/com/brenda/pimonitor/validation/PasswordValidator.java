@@ -1,4 +1,4 @@
-package com.brenda.pimonitor;
+package com.brenda.pimonitor.validation;
 
 import org.springframework.stereotype.Component;
 

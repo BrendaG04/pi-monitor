@@ -1,5 +1,8 @@
-package com.brenda.pimonitor;
+package com.brenda.pimonitor.service;
 
+import com.brenda.pimonitor.model.UserEntity;
+import com.brenda.pimonitor.repository.UserRepository;
+import com.brenda.pimonitor.validation.PasswordValidator;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;

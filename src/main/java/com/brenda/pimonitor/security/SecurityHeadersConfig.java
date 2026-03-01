@@ -1,4 +1,4 @@
-package com.brenda.pimonitor;
+package com.brenda.pimonitor.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

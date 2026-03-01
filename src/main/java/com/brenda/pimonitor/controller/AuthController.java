@@ -1,5 +1,14 @@
-package com.brenda.pimonitor;
+package com.brenda.pimonitor.controller;
 
+import com.brenda.pimonitor.dto.LoginRequest;
+import com.brenda.pimonitor.dto.LoginResponse;
+import com.brenda.pimonitor.dto.SignupRequest;
+import com.brenda.pimonitor.dto.SignupResponse;
+import com.brenda.pimonitor.model.UserEntity;
+import com.brenda.pimonitor.security.JwtUtil;
+import com.brenda.pimonitor.service.AuthService;
+import com.brenda.pimonitor.service.RateLimitService;
+import com.brenda.pimonitor.validation.PasswordValidator;
 import jakarta.validation.Valid;
 import io.github.bucket4j.Bucket;
 import io.github.bucket4j.ConsumptionProbe;

@@ -1,4 +1,4 @@
-package com.brenda.pimonitor;
+package com.brenda.pimonitor.security;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

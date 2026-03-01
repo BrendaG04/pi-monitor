@@ -1,5 +1,7 @@
-package com.brenda.pimonitor;
+package com.brenda.pimonitor.security;
 
+import com.brenda.pimonitor.model.UserEntity;
+import com.brenda.pimonitor.service.AuthService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
